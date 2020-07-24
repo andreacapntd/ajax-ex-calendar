@@ -9,55 +9,73 @@
 // year: 2018
 // month: 0 ~ 11
 
-function getCalendarAjaxMoment() {
+function addPrintMonth(currentMonth) {
 
-  var month = 0;
+  var daysMonth = currentMonth.daysInMonth();
+
+  var template = $('#template').html();
+  var compiled = Handlebars.compile(template);
+  var target = $('#days');
+  target.html('');
+
+  for (var i = 1; i <= daysMonth; i++) {
+
+    var allDate = moment({
+
+      year: currentMonth.year(),
+      month: currentMonth.month(),
+      day: i
+
+    });
+
+    var daysHtml = compiled({
+
+      'value' : i,
+      'dateComplete': allDate.format('YYYY-MM-DD')
+
+    });
+
+    target.append(daysHtml);
+
+  }
+}
+
+function addPrintHoliday(currentMonth) {
+
+  var year = currentMonth.year();
+  var month = currentMonth.month();
+
 
   $.ajax({
 
-    url: 'https://flynn.boolean.careers/exercises/api/holidays',
-    method: 'GET',
-    data: {
+   url: 'https://flynn.boolean.careers/exercises/api/holidays',
+   method: 'GET',
+   data: {
 
-      'month': month,
-      'year': 2018
+     'month': month,
+     'year': year
 
-    },
-    success: function(data) {
+   },
+   success: function(data) {
 
-      var success = data['success'];
-      var date = data['response'];
-      console.log(date);
+     var success = data['success'];
+     var date = data['response'];
 
-      var target = $('#days')
+     for (var i = 0; i < date.length; i++) {
 
+      var element = $("#days li[data-dateComplete='"+date[i]['date']+"']");
+      element.addClass('holidays');
+      element.append(' ' + date[i]['name']);
 
+     }
+   },
+   error: function() {
 
-      for (var i = 1; i <= 31 ; i++) {
+     console.log('error');
 
-        var newOpt = '<li value="' + i + '">' + i + '</li>'
-        target.append(newOpt);
-      }
-
-      for (var i = 0; i < date.length; i++) {
-
-        var holidays = date[i];
-        var holidayName = holidays['name'];
-        var holidayDate = holidays['date'];
-        var mom = moment(holidayDate, 'YYYY/MM/DD');
-        console.log(mom.format('YYYY/MM/DD'));
-
-      }
-
-    },
-    error: function() {
-
-      console.log('error');
-    }
-  })
-}
-
-
+   }
+ });
+};
 
 
 
@@ -74,9 +92,13 @@ function getCalendarAjaxMoment() {
 
 function init() {
 
-  getCalendarAjaxMoment();
+  var currentMonth = moment('2018-01-01');
 
-}
+  addPrintMonth(currentMonth);
+  addPrintHoliday(currentMonth);
+
+
+};
 
 
 

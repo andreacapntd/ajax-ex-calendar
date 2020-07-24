@@ -1,1 +1,45 @@
+/* GENERAL RULES */
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* MONTH YEAR */
+
+h1 {
+
+  text-align: center;
+  margin-top: 40px;
+
+}
+/* DAYS CONTAINER */
+
+.days-container {
+
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+
+}
+
+.days-container #days {
+
+
+  font-size: 20px;
+  list-style-type: none;
+
+}
+
+.days-container #days li {
+
+  margin: 5px 0;
+
+}
+
+.holidays {
+
+  color: red;
+
+}
