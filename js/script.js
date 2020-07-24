@@ -77,11 +77,56 @@ function addPrintHoliday(currentMonth) {
  });
 };
 
+function addListenerClickNextMonth() {
 
+  var target = $('.fa-angle-right');
 
+  target.click(clickNextMonth);
 
+}
 
+function clickNextMonth() {
 
+  var monthActive = $('h1.active');
+  monthActive.removeClass('active');
+  monthActive.next().addClass('active');
+
+}
+
+function addListenerClickPrevMonth() {
+
+  var target = $('.fa-angle-left');
+
+  target.click(clickPrevMonth);
+
+}
+
+function clickPrevMonth() {
+
+  var monthActive = $('h1.active');
+  monthActive.removeClass('active');
+  monthActive.prev().addClass('active');
+
+}
+
+function addListenerKeyboard() {
+
+  $(document).keydown(function() {
+
+    var key = event.which;
+
+    if (key == 39) {
+
+      clickNextMonth();
+
+    } else if (key == 37) {
+
+      clickPrevMonth();
+      
+    }
+  });
+
+}
 
 
 
@@ -96,6 +141,9 @@ function init() {
 
   addPrintMonth(currentMonth);
   addPrintHoliday(currentMonth);
+  addListenerClickNextMonth();
+  addListenerClickPrevMonth();
+  addListenerKeyboard();
 
 
 };

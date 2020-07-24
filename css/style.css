@@ -5,15 +5,39 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* MONTHS-YEARS-CONTAINER */
 
+.months-years-container {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+
+}
+
+.fa-angle-left, .fa-angle-right {
+
+  font-size: 30px;
+  cursor: pointer;
+
+}
 /* MONTH YEAR */
 
 h1 {
 
+  display: none;
   text-align: center;
-  margin-top: 40px;
+  margin: 0 40px;
 
 }
+
+h1.active {
+
+  display: block;
+
+}
+
 /* DAYS CONTAINER */
 
 .days-container {
