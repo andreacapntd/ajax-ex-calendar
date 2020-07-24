@@ -91,6 +91,12 @@ function clickNextMonth() {
   monthActive.removeClass('active');
   monthActive.next().addClass('active');
 
+  if (monthActive.hasClass('last')) {
+
+    alert('Dati non disponibili, ricarica la pagina');
+
+  }
+
 }
 
 function addListenerClickPrevMonth() {
@@ -107,6 +113,12 @@ function clickPrevMonth() {
   monthActive.removeClass('active');
   monthActive.prev().addClass('active');
 
+  if (monthActive.hasClass('first')) {
+
+    alert('Dati non disponibili, ricarica la pagina');
+
+  }
+
 }
 
 function addListenerKeyboard() {
@@ -122,7 +134,7 @@ function addListenerKeyboard() {
     } else if (key == 37) {
 
       clickPrevMonth();
-      
+
     }
   });
 
