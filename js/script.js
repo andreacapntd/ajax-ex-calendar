@@ -77,15 +77,23 @@ function addPrintHoliday(currentMonth) {
  });
 };
 
-function addListenerClickNextMonth() {
+function addListenerClickNextMonth(currentMonth) {
 
   var target = $('.fa-angle-right');
 
-  target.click(clickNextMonth);
+  target.click(function() {
+    clickNextMonth(currentMonth);
+  });
 
 }
 
-function clickNextMonth() {
+function clickNextMonth(currentMonth) {
+
+  var nextmonth = moment(currentMonth.add(1, 'M'));
+  console.log(nextmonth);
+
+  addPrintMonth(nextmonth);
+  addPrintHoliday(nextmonth);
 
   var monthActive = $('h1.active');
   monthActive.removeClass('active');
@@ -97,17 +105,30 @@ function clickNextMonth() {
 
   }
 
+
+
+
 }
 
-function addListenerClickPrevMonth() {
+function addListenerClickPrevMonth(currentMonth) {
 
   var target = $('.fa-angle-left');
 
-  target.click(clickPrevMonth);
+  target.click(function() {
+
+    clickPrevMonth(currentMonth);
+
+  });
 
 }
 
-function clickPrevMonth() {
+function clickPrevMonth(currentMonth) {
+
+  var prevMonth = moment(currentMonth.add(-1, 'M'));
+
+
+  addPrintMonth(prevMonth);
+  addPrintHoliday(prevMonth);
 
   var monthActive = $('h1.active');
   monthActive.removeClass('active');
@@ -121,7 +142,7 @@ function clickPrevMonth() {
 
 }
 
-function addListenerKeyboard() {
+function addListenerKeyboard(currentMonth) {
 
   $(document).keydown(function() {
 
@@ -129,11 +150,11 @@ function addListenerKeyboard() {
 
     if (key == 39) {
 
-      clickNextMonth();
+      clickNextMonth(currentMonth);
 
     } else if (key == 37) {
 
-      clickPrevMonth();
+      clickPrevMonth(currentMonth);
 
     }
   });
@@ -153,9 +174,9 @@ function init() {
 
   addPrintMonth(currentMonth);
   addPrintHoliday(currentMonth);
-  addListenerClickNextMonth();
-  addListenerClickPrevMonth();
-  addListenerKeyboard();
+  addListenerClickNextMonth(currentMonth);
+  addListenerClickPrevMonth(currentMonth);
+  addListenerKeyboard(currentMonth);
 
 
 };
