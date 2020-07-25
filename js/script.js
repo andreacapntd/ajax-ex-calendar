@@ -2,6 +2,8 @@
 // Il calendario partirà da gennaio 2018 e si concluderà a dicembre 2018 (unici dati disponibili sull'API).
 // Milestone 1
 // Creiamo il mese di Gennaio, e con la chiamata all'API inseriamo le festività.
+// Milestone 2
+// Diamo la possibilità di cambiare mese, gestendo il caso in cui l'API non possa ritornare festività.
 
 //API: https://flynn.boolean.careers/exercises/api/holidays
 
@@ -89,11 +91,10 @@ function addListenerClickNextMonth(currentMonth) {
 
 function clickNextMonth(currentMonth) {
 
-  var nextmonth = moment(currentMonth.add(1, 'M'));
-  console.log(nextmonth);
+  var nextMonth = moment(currentMonth.add(1, 'M'));
 
-  addPrintMonth(nextmonth);
-  addPrintHoliday(nextmonth);
+  addPrintMonth(nextMonth);
+  addPrintHoliday(nextMonth);
 
   var monthActive = $('h1.active');
   monthActive.removeClass('active');
@@ -104,10 +105,6 @@ function clickNextMonth(currentMonth) {
     alert('Dati non disponibili, ricarica la pagina');
 
   }
-
-
-
-
 }
 
 function addListenerClickPrevMonth(currentMonth) {
