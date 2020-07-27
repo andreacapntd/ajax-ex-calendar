@@ -78,6 +78,7 @@ function addPrintHoliday(currentMonth) {
    }
  });
 };
+<<<<<<< Updated upstream
 
 function addListenerClickNextMonth(currentMonth) {
 
@@ -156,10 +157,100 @@ function addListenerKeyboard(currentMonth) {
     }
   });
 
+=======
+
+
+function addListenerClickNextMonth(currentMonth) {
+
+  var target = $('.fa-angle-right');
+
+  target.click(function() {
+
+    clickNextMonth(currentMonth);
+
+  });
+
+}
+
+function clickNextMonth(currentMonth) {
+
+  var futureMonth = moment(currentMonth).add(1, 'M');
+  var futureMonthEnd = moment(futureMonth).endOf('month');
+  
+
+
+
+
+
+
+  var monthActive = $('h1.active');
+  monthActive.removeClass('active');
+  monthActive.next().addClass('active');
+
+  if (monthActive.hasClass('last')) {
+
+    alert('Dati non disponibili, ricarica la pagina');
+
+  }
+
+
+
+}
+
+function addListenerClickPrevMonth() {
+
+  var target = $('.fa-angle-left');
+
+  target.click(clickPrevMonth);
+
+}
+
+function clickPrevMonth() {
+
+  var monthActive = $('h1.active');
+  monthActive.removeClass('active');
+  monthActive.prev().addClass('active');
+
+  if (monthActive.hasClass('first')) {
+
+    alert('Dati non disponibili, ricarica la pagina');
+
+  }
+
+}
+
+function addListenerKeyboard() {
+
+  $(document).keydown(function() {
+
+    var key = event.which;
+
+    if (key == 39) {
+
+      clickNextMonth();
+
+    } else if (key == 37) {
+
+      clickPrevMonth();
+
+    }
+  });
+
+>>>>>>> Stashed changes
 }
 
 
-
+// function test(currentMonth) {
+//
+//
+//
+//
+//   console.log(futureMonth);
+//
+//
+//
+//
+// }
 
 
 
@@ -168,12 +259,21 @@ function addListenerKeyboard(currentMonth) {
 function init() {
 
   var currentMonth = moment('2018-01-01');
+;
 
   addPrintMonth(currentMonth);
+<<<<<<< Updated upstream
   addPrintHoliday(currentMonth);
   addListenerClickNextMonth(currentMonth);
   addListenerClickPrevMonth(currentMonth);
   addListenerKeyboard(currentMonth);
+=======
+  addPrintHoliday(currentMonth);
+  addListenerClickNextMonth(currentMonth);
+  addListenerClickPrevMonth();
+  addListenerKeyboard();
+  // test(currentMonth);
+>>>>>>> Stashed changes
 
 
 };
